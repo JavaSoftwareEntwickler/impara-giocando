@@ -1,4 +1,4 @@
-package com.imparagiocando.impara_giocando.mathgame;
+package com.imparagiocando.imparagiocando.mathgame;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +16,7 @@ public class MathGameController {
         MathProblemDTO problema = mathGameService.generateProblem();
         model.addAttribute("problem", problema);
         model.addAttribute("soluzione", mathGameService.generaSoluzioni(problema));
+        model.addAttribute("punteggio", mathGameService.getPunteggio());
         return "mathgame";
     }
 
@@ -31,8 +32,9 @@ public class MathGameController {
                 operation, answer);
         model.addAttribute("message", result);
         model.addAttribute("messageClass", "error");
-        if(result.contains("Ottimo"))
+        if(result.contains("Ottimo")) {
             model.addAttribute("messageClass", "correct");
+        }
         return "result";
     }
 }

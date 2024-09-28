@@ -1,5 +1,6 @@
-package com.imparagiocando.impara_giocando.mathgame;
+package com.imparagiocando.imparagiocando.mathgame;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -8,6 +9,8 @@ import java.util.*;
 public class MathGameService {
 
     private Random random = new Random();
+    @Autowired
+    private Punteggio punteggio;
 
     // Genera un problema matematico casuale (somma o sottrazione)
     public MathProblemDTO generateProblem() {
@@ -28,7 +31,12 @@ public class MathGameService {
 
     public boolean checkAnswer(int num1, int num2, String operation, int answer) {
         int correctAnswer = calcolaRispostaCorretta(num1,num2,operation);
-        return answer == correctAnswer;
+        boolean isRispostaCorretta = false;
+         if(answer == correctAnswer){
+             punteggio.setTotale(punteggio.getTotale()+1);
+             isRispostaCorretta = true;
+         }
+         return isRispostaCorretta;
     }
 
     public int calcolaRispostaCorretta(int num1, int num2, String operation){
@@ -75,5 +83,9 @@ public class MathGameService {
     private static SoluzioneDTO getSoluzioneDTOConOrdineRandomico(Set<Integer> soluzioni) {
         List<Integer> valori = getSoluzioniMischiate(soluzioni);
         return new SoluzioneDTO(valori.get(0), valori.get(1), valori.get(2), valori.get(3));
+    }
+
+    public int getPunteggio() {
+        return punteggio.getTotale();
     }
 }

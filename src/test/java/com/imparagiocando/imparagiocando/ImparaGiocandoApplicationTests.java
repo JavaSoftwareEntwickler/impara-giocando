@@ -1,4 +1,4 @@
-package com.imparagiocando.impara_giocando;
+package com.imparagiocando.imparagiocando;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
