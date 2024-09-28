@@ -9,7 +9,7 @@
     <h1 class="titolo-operazione" th:case="'+'">Impariamo l' addizione</h1>
     <h1 class="titolo-operazione" th:case="'-'">Impariamo la sottrazione</h1>
     <h1 class="titolo-operazione" th:case="'*'">Impariamo la moltiplicazione</h1>
-
+    <h2 th:text="'Punteggio attuale: '+ ' ' + ${punteggio}"></h2>
     <h2 th:text="'Quanto fa ' + ${problem.num1} + ' ' + ${problem.operation} + ' ' + ${problem.num2} + '?'"></h2>
     <form action="/answer" method="post">
         <input type="hidden" name="problem" th:value="${problem}">

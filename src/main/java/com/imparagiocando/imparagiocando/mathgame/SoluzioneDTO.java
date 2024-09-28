@@ -1,4 +1,4 @@
-package com.imparagiocando.impara_giocando.mathgame;
+package com.imparagiocando.imparagiocando.mathgame;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
