@@ -66,5 +66,5 @@ Un **DTO** che rappresenta le quattro possibili soluzioni a un problema matemati
 1. **Clona il repository:**
 
    ```bash
-   git clone https://github.com/tuo-username/impara-giocando.git
+   git clone https://github.com/JavaSoftwareEntwickler/impara-giocando.git
    cd impara-giocando
