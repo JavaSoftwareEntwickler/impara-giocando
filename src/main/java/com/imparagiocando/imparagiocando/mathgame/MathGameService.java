@@ -10,7 +10,9 @@ public class MathGameService {
 
     private Random random = new Random();
     @Autowired
-    private Punteggio punteggio;
+    private PunteggioDTO punteggio;
+    @Autowired
+    private RispostaEsattaDTO rispostaEsattaDTO;
 
     // Genera un problema matematico casuale (somma o sottrazione)
     public MathProblemDTO generateProblem() {
@@ -21,36 +23,41 @@ public class MathGameService {
         return new MathProblemDTO(num1, num2, operation);
     }
 
-    public String checkRisposta(int num1, int num2, String operation, int answer) {
-        if(checkAnswer(num1,num2,operation,answer)){
+    public String checkRisposta(int rispostaUtente) {
+        if(verificaRispostaUtente(rispostaUtente)){
             return "Ottimo! La risposta è corretta!";
         }else{
-            return "Oops! La risposta corretta era " + calcolaRispostaCorretta(num1,num2,operation);
+            return "Oops! La risposta corretta era " + rispostaEsattaDTO.getRispostaEsatta();
         }
     }
 
-    public boolean checkAnswer(int num1, int num2, String operation, int answer) {
-        int correctAnswer = calcolaRispostaCorretta(num1,num2,operation);
-        boolean isRispostaCorretta = false;
-         if(answer == correctAnswer){
-             punteggio.setTotale(punteggio.getTotale()+1);
-             isRispostaCorretta = true;
-         }
-         return isRispostaCorretta;
+    public boolean verificaRispostaUtente(int answer) {
+         return answer == rispostaEsattaDTO.getRispostaEsatta();
     }
 
-    public int calcolaRispostaCorretta(int num1, int num2, String operation){
-        return switch (operation) {
+    public void setPunteggio(int answer) {
+        if(answer == rispostaEsattaDTO.getRispostaEsatta()){
+            punteggio.setTotale(punteggio.getTotale()+1);
+            punteggio.setRisposteCorrette(punteggio.getRisposteCorrette()+1);
+        }
+        else{
+            punteggio.setRisposteErrate(punteggio.getRisposteErrate()+1);
+        }
+    }
+
+    public void calcolaRispostaCorretta(int num1, int num2, String operation){
+       rispostaEsattaDTO.setRispostaEsatta(switch (operation) {
             case "+" -> num1 + num2;
             case "-" -> num1 - num2;
             case "*" -> num1 * num2;
             default -> 0;
-        };
+        });
     }
 
     public SoluzioneDTO generaSoluzioni(MathProblemDTO problema) {
-        int soluzioneCorretta = calcolaRispostaCorretta(problema.getNum1(), problema.getNum2(), problema.getOperation());
-        Set<Integer> soluzioni = popolaSetSoluzioni(soluzioneCorretta);
+        calcolaRispostaCorretta(problema.getNum1(), problema.getNum2(), problema.getOperation());
+        int soluzioneCorretta = rispostaEsattaDTO.getRispostaEsatta();
+                Set<Integer> soluzioni = popolaSetSoluzioni(soluzioneCorretta);
         return getSoluzioneDTOConOrdineRandomico(soluzioni);
     }
 
@@ -87,5 +94,8 @@ public class MathGameService {
 
     public int getPunteggio() {
         return punteggio.getTotale();
+    }
+    public PunteggioDTO getStatistiche(){
+        return punteggio;
     }
 }

@@ -16,7 +16,7 @@ public class MathGameController {
         MathProblemDTO problema = mathGameService.generateProblem();
         model.addAttribute("problem", problema);
         model.addAttribute("soluzione", mathGameService.generaSoluzioni(problema));
-        model.addAttribute("punteggio", mathGameService.getPunteggio());
+        model.addAttribute("punteggio", mathGameService.getStatistiche());
         return "mathgame";
     }
 
@@ -26,10 +26,8 @@ public class MathGameController {
                               @RequestParam("num2") int num2,
                               @RequestParam("operation") String operation,
                               Model model) {
-        String result = mathGameService.checkRisposta(
-                num1,
-                num2,
-                operation, answer);
+        String result = mathGameService.checkRisposta(answer);
+        mathGameService.setPunteggio(answer);
         model.addAttribute("message", result);
         model.addAttribute("messageClass", "error");
         if(result.contains("Ottimo")) {

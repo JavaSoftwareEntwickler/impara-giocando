@@ -2,35 +2,72 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Gioco di Matematica</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/main.css">
 </head>
 <body>
-<div class="container" th:switch="${problem.operation}">
-    <h1 class="titolo-operazione" th:case="'+'">Impariamo l' addizione</h1>
-    <h1 class="titolo-operazione" th:case="'-'">Impariamo la sottrazione</h1>
-    <h1 class="titolo-operazione" th:case="'*'">Impariamo la moltiplicazione</h1>
-    <h2 th:text="'Punteggio attuale: '+ ' ' + ${punteggio}"></h2>
-    <h2 th:text="'Quanto fa ' + ${problem.num1} + ' ' + ${problem.operation} + ' ' + ${problem.num2} + '?'"></h2>
-    <form action="/answer" method="post">
-        <input type="hidden" name="problem" th:value="${problem}">
-        <input type="hidden" name="operation" th:value="${problem.operation}">
-        <input type="hidden" name="num1" th:value="${problem.num1}">
-        <input type="hidden" name="num2" th:value="${problem.num2}" >
-        <!--
-        <label>
-            <select th:name="answer">
-                <option th:value="${soluzione.valore1}" th:text="${soluzione.valore1}"></option>
-                <option th:value="${soluzione.valore2}" th:text="${soluzione.valore2}"></option>
-                <option th:value="${soluzione.valore3}" th:text="${soluzione.valore3}"></option>
-                <option th:value="${soluzione.valore4}" th:text="${soluzione.valore4}"></option>
-            </select>
-        </label>
-        -->
-        <button type="submit" name="answer" th:value="${soluzione.valore1}" th:text="${soluzione.valore1}"></button>
-        <button type="submit" name="answer" th:value="${soluzione.valore2}" th:text="${soluzione.valore2}"></button>
-        <button type="submit" name="answer" th:value="${soluzione.valore3}" th:text="${soluzione.valore3}"></button>
-        <button type="submit" name="answer" th:value="${soluzione.valore4}" th:text="${soluzione.valore4}"></button>
-    </form>
+<div class="container-md text-center border">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="problema center-block text-center">
+                <h1 th:switch="${problem.operation}" th:case="'+'">Impariamo l'addizione</h1>
+                <h1 th:switch="${problem.operation}" th:case="'-'">Impariamo la sottrazione</h1>
+                <h1 th:switch="${problem.operation}" th:case="'*'">Impariamo la moltiplicazione</h1>
+                <h2 th:text="'Quanto fa ' + ${problem.num1} + ' ' + ${problem.operation} + ' ' + ${problem.num2} + '?'"></h2>
+                <form action="/answer" method="post">
+                    <input type="hidden" name="problem" th:value="${problem}">
+                    <input type="hidden" name="operation" th:value="${problem.operation}">
+                    <input type="hidden" name="num1" th:value="${problem.num1}">
+                    <input type="hidden" name="num2" th:value="${problem.num2}" >
+                    <button type="submit" name="answer" th:value="${soluzione.valore1}" th:text="${soluzione.valore1}"></button>
+                    <button type="submit" name="answer" th:value="${soluzione.valore2}" th:text="${soluzione.valore2}"></button>
+                    <button type="submit" name="answer" th:value="${soluzione.valore3}" th:text="${soluzione.valore3}"></button>
+                    <button type="submit" name="answer" th:value="${soluzione.valore4}" th:text="${soluzione.valore4}"></button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="punteggio center-block text-center">
+                <p th:text="'Punteggio Totale: '+ ' ' + ${punteggio.totale}"></p>
+                <p>...</p>
+                <p>...</p>
+                <p>...</p>
+            </div>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4">
+            <div class="punteggio center-block text-center">
+                <p th:text="'Risposte corrette: '+ ' ' + ${punteggio.risposteCorrette}"></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4">
+            <div class="punteggio center-block text-center">
+                <p th:text="'Risposte sbagliate: '+ ' ' + ${punteggio.risposteErrate}"></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+            <div class="punteggio center-block text-center">
+                <p th:text="Classifica"></p>
+                <p>Primo:</p>
+                <p>Secondo:</p>
+                <p>Terzo:</p>
+                <p >Quarto:</p>
+            </div>
+        </div>
+    </div>
+
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

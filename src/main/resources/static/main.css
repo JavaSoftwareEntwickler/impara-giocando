@@ -1,57 +1,65 @@
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f8ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2 {
-            color: #333;
-        }
-        input[type="number"] {
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            width: 80px;
-            text-align: center;
-        }
-        button {
-            padding: 10px 20px;
-            background: #1e549f;
-           #verde background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            min-width: 85px;
-        }
-        button:hover {
-           #verde  background-color: #218838;
-           	background: #2e79ba;
-        }
-        .message {
-            font-size: 18px;
-            margin-top: 20px;
-            color: #007bff;
-        }
-        .error{
-            background: #ff6464;
-        }
-        .correct{
-            background: #5be7a9;
-        }
-        .titolo-operazione{
-         width: 450px;
-        }
+body{
+    padding-top: 90px;
+}
+.problema {
+    margin-top: 10px;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+h1, h2 {
+    color: #333;
+}
+input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 80px;
+    text-align: center;
+}
+button {
+    padding: 10px 20px;
+    background: #1e549f;
+   #verde background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    min-width: 85px;
+}
+button:hover {
+   #verde  background-color: #218838;
+    background: #2e79ba;
+}
+.message {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #007bff;
+}
+.error{
+    background: #ff6464;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.correct{
+    background: #5be7a9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.punteggio {
+    margin-top: 10px;
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.border{
+    border:4px #ff6464;
+}

@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @NoArgsConstructor
-public class Punteggio {
-
+public class PunteggioDTO {
     private int totale;
+    private int risposteCorrette;
+    private int risposteErrate;
 }
