@@ -13,17 +13,19 @@ public class MathGameController {
 
     @GetMapping({"/", "/game"})
     public String home(Model model) {
-        model.addAttribute("problem", mathGameService.generateProblem());
+        MathProblemDTO problema = mathGameService.generateProblem();
+        model.addAttribute("problem", problema);
+        model.addAttribute("soluzione", mathGameService.generaSoluzioni(problema));
         return "mathgame";
     }
 
     @PostMapping("/answer")
-    public String checkAnswer(@RequestParam("answer") int answer,
-                              @RequestParam("num1") int num1,
-                              @RequestParam("num2") int num2,
+    public String checkAnswer(@RequestParam("answer") String answer,
+                              @RequestParam("num1") String num1,
+                              @RequestParam("num2") String num2,
                               @RequestParam("operation") String operation,
                               Model model) {
-        String result = mathGameService.checkRisposta(num1, num2, operation, answer);
+        String result = mathGameService.checkRisposta(Integer.valueOf(num1), Integer.valueOf(num2), operation, Integer.valueOf(answer));
         model.addAttribute("message", result);
         model.addAttribute("messageClass", "error");
         if(result.contains("Bravo"))

@@ -2,7 +2,7 @@ package com.imparagiocando.impara_giocando.mathgame;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class MathGameService {
@@ -45,7 +45,30 @@ public class MathGameService {
         };
     }
 
-    public void setColoreRisposta(){
+    public SoluzioneDTO generaSoluzioni(MathProblemDTO problema) {
+        int soluzioneCorretta = calcolaRispostaCorretta(problema.getNum1(), problema.getNum2(), problema.getOperation());
 
+        Set<Integer> soluzioni = new HashSet<>(4);
+        soluzioni.add(soluzioneCorretta);
+        while(soluzioni.size()<4){
+            soluzioni.add(random.nextInt(100) + 1);
+        }
+        List<Integer> listSoluzioni = new ArrayList<>(soluzioni);
+        Collections.shuffle(listSoluzioni);
+        if (soluzioneCorretta<0) {
+            int negativo = listSoluzioni.getFirst()*-1;
+            listSoluzioni.set(0, negativo);
+        }
+        return getSoluzioneDTOConOrdineRandomico(soluzioneCorretta, listSoluzioni.get(0), listSoluzioni.get(1), listSoluzioni.get(2));
+    }
+
+    private static SoluzioneDTO getSoluzioneDTOConOrdineRandomico(int soluzioneCorretta, int sol2, int sol3, int sol4) {
+        List<Integer> valori = new ArrayList<>();
+        valori.add(soluzioneCorretta);
+        valori.add(sol2);
+        valori.add(sol3);
+        valori.add(sol4);
+        Collections.shuffle(valori);
+        return new SoluzioneDTO(valori.get(0), valori.get(1), valori.get(2), valori.get(3));
     }
 }

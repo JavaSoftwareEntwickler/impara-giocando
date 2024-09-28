@@ -15,8 +15,10 @@
         <input type="hidden" name="num1" th:value="${problem.num1}">
         <input type="hidden" name="num2" th:value="${problem.num2}">
         <input type="hidden" name="operation" th:value="${problem.operation}">
-        <input type="number" name="answer" placeholder="Risposta">
-        <button type="submit">Verifica</button>
+        <button type="submit" name="answer" th:value="${soluzione.valore1}" th:text="${soluzione.valore1}"></button>
+        <button type="submit" name="answer" th:value="${soluzione.valore2}" th:text="${soluzione.valore2}"></button>
+        <button type="submit" name="answer" th:value="${soluzione.valore3}" th:text="${soluzione.valore3}"></button>
+        <button type="submit" name="answer" th:value="${soluzione.valore4}" th:text="${soluzione.valore4}"></button>
     </form>
 </div>
 </body>
