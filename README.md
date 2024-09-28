@@ -64,7 +64,25 @@ Un **DTO** che rappresenta le quattro possibili soluzioni a un problema matemati
 ### Come Eseguire il Progetto
 
 1. **Clona il repository:**
+2. **Apri il progetto su cmd:**
+3. **Compila ed esegui:**
 
    ```bash
-   git clone https://github.com/tuo-username/impara-giocando.git
+   git clone https://github.com/JavaSoftwareEntwickler/impara-giocando.git
    cd impara-giocando
+   mvn clean install
+   mvn spring-boot:run
+   
+5. **Apri il browser e vai alla seguente URL:**
+   ```bash
+   http://localhost:8080/game
+
+### Come Stoppare l'applicazione
+
+1. **Da cmd:**
+   ```bash
+   ctrl c
+
+### Licenza
+
+Questo progetto è sotto licenza MIT. Consulta il file LICENSE per ulteriori dettagli.
