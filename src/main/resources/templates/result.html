@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Risultato</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<body>
+<div th:class="'container ' + ${messageClass}">
+    <h1>Risultato</h1>
+    <p th:text="${message}"></p>
+    <a href="/game"><button>Prossima Domanda</button></a>
+</div>
+</body>
+</html>
