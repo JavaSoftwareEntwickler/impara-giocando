@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class SoluzioneDTO {
-
     private int valore1;
     private int valore2;
     private int valore3;

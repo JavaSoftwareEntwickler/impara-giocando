@@ -12,9 +12,20 @@
 
     <h2 th:text="'Quanto fa ' + ${problem.num1} + ' ' + ${problem.operation} + ' ' + ${problem.num2} + '?'"></h2>
     <form action="/answer" method="post">
-        <input type="hidden" name="num1" th:value="${problem.num1}">
-        <input type="hidden" name="num2" th:value="${problem.num2}">
+        <input type="hidden" name="problem" th:value="${problem}">
         <input type="hidden" name="operation" th:value="${problem.operation}">
+        <input type="hidden" name="num1" th:value="${problem.num1}">
+        <input type="hidden" name="num2" th:value="${problem.num2}" >
+        <!--
+        <label>
+            <select th:name="answer">
+                <option th:value="${soluzione.valore1}" th:text="${soluzione.valore1}"></option>
+                <option th:value="${soluzione.valore2}" th:text="${soluzione.valore2}"></option>
+                <option th:value="${soluzione.valore3}" th:text="${soluzione.valore3}"></option>
+                <option th:value="${soluzione.valore4}" th:text="${soluzione.valore4}"></option>
+            </select>
+        </label>
+        -->
         <button type="submit" name="answer" th:value="${soluzione.valore1}" th:text="${soluzione.valore1}"></button>
         <button type="submit" name="answer" th:value="${soluzione.valore2}" th:text="${soluzione.valore2}"></button>
         <button type="submit" name="answer" th:value="${soluzione.valore3}" th:text="${soluzione.valore3}"></button>

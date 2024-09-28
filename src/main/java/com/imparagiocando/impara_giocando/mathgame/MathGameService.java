@@ -20,22 +20,17 @@ public class MathGameService {
 
     public String checkRisposta(int num1, int num2, String operation, int answer) {
         if(checkAnswer(num1,num2,operation,answer)){
-            return "Bravo! La risposta è corretta!";
+            return "Ottimo! La risposta è corretta!";
         }else{
             return "Oops! La risposta corretta era " + calcolaRispostaCorretta(num1,num2,operation);
         }
     }
 
-    // Verifica la risposta dell'utente
     public boolean checkAnswer(int num1, int num2, String operation, int answer) {
         int correctAnswer = calcolaRispostaCorretta(num1,num2,operation);
-
-        if (answer == correctAnswer) {
-            return true;//"Bravo! La risposta è corretta!";
-        } else {
-            return false; //"Oops! La risposta corretta era " + correctAnswer;
-        }
+        return answer == correctAnswer;
     }
+
     public int calcolaRispostaCorretta(int num1, int num2, String operation){
         return switch (operation) {
             case "+" -> num1 + num2;
@@ -47,28 +42,38 @@ public class MathGameService {
 
     public SoluzioneDTO generaSoluzioni(MathProblemDTO problema) {
         int soluzioneCorretta = calcolaRispostaCorretta(problema.getNum1(), problema.getNum2(), problema.getOperation());
-
-        Set<Integer> soluzioni = new HashSet<>(4);
-        soluzioni.add(soluzioneCorretta);
-        while(soluzioni.size()<4){
-            soluzioni.add(random.nextInt(100) + 1);
-        }
-        List<Integer> listSoluzioni = new ArrayList<>(soluzioni);
-        Collections.shuffle(listSoluzioni);
-        if (soluzioneCorretta<0) {
-            int negativo = listSoluzioni.getFirst()*-1;
-            listSoluzioni.set(0, negativo);
-        }
-        return getSoluzioneDTOConOrdineRandomico(soluzioneCorretta, listSoluzioni.get(0), listSoluzioni.get(1), listSoluzioni.get(2));
+        Set<Integer> soluzioni = popolaSetSoluzioni(soluzioneCorretta);
+        return getSoluzioneDTOConOrdineRandomico(soluzioni);
     }
 
-    private static SoluzioneDTO getSoluzioneDTOConOrdineRandomico(int soluzioneCorretta, int sol2, int sol3, int sol4) {
-        List<Integer> valori = new ArrayList<>();
-        valori.add(soluzioneCorretta);
-        valori.add(sol2);
-        valori.add(sol3);
-        valori.add(sol4);
-        Collections.shuffle(valori);
+    private Set<Integer> popolaSetSoluzioni(int soluzioneCorretta) {
+        Set<Integer> soluzioni = new HashSet<>(4);
+        soluzioni.add(soluzioneCorretta);
+        if(soluzioneCorretta < 0) soluzioni.add((random.nextInt(10) + 1)*-1);
+        while(soluzioni.size()<4){
+            soluzioni.add(getRandomNumber());
+        }
+        return soluzioni;
+    }
+
+    private static List<Integer> getSoluzioniMischiate(Set<Integer> soluzioni) {
+        List<Integer> listSoluzioni = new ArrayList<>(soluzioni);
+        Collections.shuffle(listSoluzioni);
+        return listSoluzioni;
+    }
+
+    private int getRandomNumber(){
+        return switch (random.nextInt(4) + 1) {
+            case 1 -> random.nextInt(33) + 1;
+            case 2 -> random.nextInt(66) + 1;
+            case 3 -> random.nextInt(99) + 1;
+            case 4 -> (random.nextInt(10) + 1)*-1;
+            default -> 0;
+        };
+    }
+
+    private static SoluzioneDTO getSoluzioneDTOConOrdineRandomico(Set<Integer> soluzioni) {
+        List<Integer> valori = getSoluzioniMischiate(soluzioni);
         return new SoluzioneDTO(valori.get(0), valori.get(1), valori.get(2), valori.get(3));
     }
 }
