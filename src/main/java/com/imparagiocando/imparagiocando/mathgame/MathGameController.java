@@ -11,7 +11,7 @@ public class MathGameController {
     @Autowired
     private MathGameService mathGameService;
 
-    @GetMapping({"/", "/game"})
+    @GetMapping({"","/", "/game"})
     public String home(Model model) {
         MathProblemDTO problema = mathGameService.generateProblem();
         model.addAttribute("problem", problema);

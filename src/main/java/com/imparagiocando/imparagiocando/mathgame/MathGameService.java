@@ -92,9 +92,6 @@ public class MathGameService {
         return new SoluzioneDTO(valori.get(0), valori.get(1), valori.get(2), valori.get(3));
     }
 
-    public int getPunteggio() {
-        return punteggio.getTotale();
-    }
     public PunteggioDTO getStatistiche(){
         return punteggio;
     }
