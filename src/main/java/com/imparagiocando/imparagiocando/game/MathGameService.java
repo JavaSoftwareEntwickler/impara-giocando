@@ -1,7 +1,6 @@
 package com.imparagiocando.imparagiocando.game;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -67,7 +66,7 @@ public class MathGameService {
     }
 
     private Set<Integer> popolaSetSoluzioni(int soluzioneCorretta) {
-        Set<Integer> soluzioni = new HashSet<>(4);
+        Set<Integer> soluzioni = new HashSet<>();
         soluzioni.add(soluzioneCorretta);
         if(soluzioneCorretta < 0) soluzioni.add((getRandom().nextInt(10) + 1)*-1);
         while(soluzioni.size()<4){
