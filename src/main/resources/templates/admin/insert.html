@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="/partial/head"></head>
+  <body>
+  <div th:replace="/partial/nav"></div>
+	<div class="container">
+		<div>
+			<form th:object="${libro}" th:method="POST"
+				th:action="@{/admin/insertBook}"  enctype="multipart/form-data">
+				<div class="form-group row">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-6">
+						<h2 class="text-info">
+							<a href="/admin">&larr;</a>&nbsp;&nbsp;Inserisci un nuovo libro
+						</h2>
+					</div>
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+						<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+					</div>
+					
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Titolo</label>
+					<div class="col-sm-6">
+						<input name="titolo" class="form-control">
+						<p class="alert alert-danger" th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}">Name Error</p>
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Copertina</label>
+					<div class="col-sm-6">
+						<input name="file" type="file" value="" class="form-control">
+						<input name="copertina" type="hidden" class="form-control">
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Descrizione</label>
+					<div class="col-sm-6">
+						<textarea name="descrizione" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Anno di
+						pubblicazione</label>
+					<div class="col-sm-6">
+						<input name="anno" class="form-control">
+					
+					</div>
+				</div>
+				<input hidden type="date"  name="dataInserimento" class="form-control" th:value="${dataInserimento}">
+				<div class="form-group row m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Prezzo</label>
+					<div class="col-sm-6">
+						<input name="prezzo" class="form-control">
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Giudizio</label>
+					<div class="col-sm-6">
+						<input name="giudizio" class="form-control">
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Data</label>
+					<div class="col-sm-6">
+						<input type="date" name="data" class="form-control">
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Genere</label>
+					<div class="col-sm-6">
+						<select name="idgenere" class="form-control">
+							<option th:each="g : ${generi}" th:value="${g.idgenere}" th:text="${g.nomegenere}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Autore</label>
+					<div class="col-sm-6 form-check form-check-inline">
+					
+						<input th:each="a : ${autori}" type="checkbox" name="autori"  
+							th:value="${a.idautore}" 
+							th:text="${a.nome} +' ' +${a.cognome}">	
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label"></label>
+					<div class="col-sm-6">
+						<input type="submit" value="Inserisci il nuovo libro"
+							class="btn btn-outline-primary mr-2" />
+						<input type="reset"
+							value="Reimposta i valori iniziali"
+							class="btn btn-outline-secondary mr-2" />
+					</div>
+
+				</div>
+			</form>
+
+		</div>
+	</div>
+	<!-- Contenuti della pagina -->
+	<div th:replace="/partial/footer"></div>
+	<div th:replace="/partial/script"></div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="/partial/head"></head>
+<body>
+	<div th:replace="/partial/nav"></div>
+	<div class="container">
+		<div>
+			<form th:object="${libro}" th:method="POST"
+				th:action="@{/admin/deleteLibro}">
+				
+				<div class="form-group row m-3">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-6">
+						<h2 class="text-info">
+							<a href="/admin">&larr;</a>&nbsp;&nbsp;Modifica il Libro
+							selezionato
+						</h2>
+					</div>
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+						<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+					</div>
+
+				</div>
+
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Idlibro</label>
+					<div class="col-sm-6">
+						<input th:value="${libro.idlibro}" name="idlibro"
+							class="form-control">
+					</div>
+				</div>
+
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Titolo</label>
+					<div class="col-sm-6">
+						<input th:value="${libro.titolo}" name="titolo"
+							class="form-control">
+						<p class="alert alert-danger"
+							th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}">Name
+							Error</p>
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Copertina</label>
+					<div class="col-sm-6">
+						<input name="file" type="file" value="" class="form-control">
+						<input th:value="${libro.copertina}" name="copertina"
+							type="hidden" class="form-control">
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Descrizione</label>
+					<div class="col-sm-6">
+						<textarea th:value="${libro.descrizione}" name="descrizione"
+							class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Anno di
+						pubblicazione</label>
+					<div class="col-sm-6">
+						<input th:value="${libro.anno}" name="anno" class="form-control">
+
+					</div>
+				</div>
+				<div class="form-group row m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Prezzo</label>
+					<div class="col-sm-6">
+						<input th:value="${libro.prezzo}" name="prezzo"
+							class="form-control">
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Giudizio</label>
+					<div class="col-sm-6">
+						<input th:value="${libro.giudizio}" name="giudizio"
+							class="form-control">
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Data</label>
+					<div class="col-sm-6">
+						<input th:value="${libro.data}" type="date" name="data"
+							class="form-control">
+					</div>
+				</div>
+
+
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label"></label>
+					<div class="col-sm-6">
+						<input type="submit" value="Conferma l'eliminazione"
+							class="btn btn-outline-primary mr-2" /> <input type="reset"
+							value="Reimposta i valori iniziali"
+							class="btn btn-outline-secondary mr-2" />
+					</div>
+
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+	<!-- Contenuti della pagina -->
+	<div th:replace="/partial/footer"></div>
+	<div th:replace="/partial/script"></div>
+</body>
+</html>

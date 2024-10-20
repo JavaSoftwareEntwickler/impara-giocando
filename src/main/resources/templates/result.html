@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Risultato</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/main.css">
-</head>
+<head th:replace="/partial/head"></head>
 <body>
-<div class="container">
+<div th:replace="/partial/nav"></div>
+<div class="container" style="margin-top: 90px;">
     <div class="row">
         <div class="col-md-8">
             <div th:class="'center-block text-center ' + ${messageClass}">
                 <h1>Risultato</h1>
                 <p th:text="${message}"></p>
-                <a href="/game"><button>Prossima Domanda</button></a>
+                <a th:href="@{/game}"><button>Prossima Domanda</button></a>
             </div>
         </div>
     </div>
 </div>
+<div th:replace="/partial/footer"></div>
+<div th:replace="/partial/script"></div>
 </body>
 </html>

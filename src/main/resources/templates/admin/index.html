@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="/partial/head"></head>
+<body>
+<div th:replace="/partial/nav"></div>
+<div class="container">
+		<div class="row">
+			<div class="col-sm-10">
+				<h2>Elenco libri</h2>
+			</div>
+			<div class="col-sm-2">
+				<a href="/admin/insert" class="btn border-success">Inserisci nuovo ...</a>
+			</div>
+		</div>
+		<div class="row">&nbsp;</div>
+		<div class="row">
+			<div>
+				<table class="table table-striped table-bordered">
+					<tr>
+						<th>Copertina</th>
+						<th>Titolo</th>
+						<th>Anno</th>
+						<th>Prezzo</th>
+						<th>Giudizio</th>
+						<th>Data</th>
+						<th>Genere</th>
+						<th>Autore/i</th>
+						<th>Modifica</th>
+						<th>Elimina</th>
+					</tr>
+					<tr th:each="c : ${libri}">
+						<td><img th:src="@{/images/{image} (image=${#strings.isEmpty(c.copertina)}  ? 'default.png' : ${c.copertina})}" width="40"></td>
+						<td th:text="${c.titolo}" th:title="${c.descrizione}" style="cursor:pointer;"></td>
+						<td th:text="${c.anno}"></td>
+						<td th:text="${c.prezzo}"></td>
+						<td th:text="${c.giudizio}"></td>
+						<td th:text="${#temporals.format(c.data, 'dd/MM/yy')}"></td>
+						<td th:text="${c.genere.nomegenere}"></td>
+						<td><strong th:each="a : ${c.autori}">
+							<span th:text="${a.nome} + ' ' + ${a.cognome}"></span>
+							</strong>
+						</td>
+						<td><a th:href="@{'/admin/edit/' +${c.idlibro}}">Modifica</a></td>
+						<td><a th:href="@{'/admin/delete/' +${c.idlibro}}">Elimina</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="row">&nbsp;</div>
+	</div>
+	<div th:replace="/partial/footer"></div>
+	<div th:replace="/partial/script"></div>
+  </body>
+</html>

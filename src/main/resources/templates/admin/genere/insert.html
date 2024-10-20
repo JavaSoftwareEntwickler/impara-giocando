@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="/partial/head"></head>
+  <body>
+  <div th:replace="/partial/nav"></div>
+	<div class="container">
+		<div>
+			<form th:object="${genere}" th:method="POST" th:action="@{/admin/genere/insertGenere}">
+				<div class="form-group row">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-6">
+						<h2 class="text-info">
+							<a href="/admin/genere">&larr;</a>&nbsp;&nbsp;Inserisci un nuovo libro
+						</h2>
+					</div>
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+						<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+					</div>
+					
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Nome genere</label>
+					<div class="col-sm-6">
+						<input name="nomegenere" class="form-control">
+						<p class="alert alert-danger" th:if="${#fields.hasErrors('nomegenere')}" th:errors="*{nomegenere}">Name Error</p>
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label">Descrizione</label>
+					<div class="col-sm-6">
+						<textarea name="descrizione" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group row  m-3">
+					<div class="col-sm-2"></div>
+					<label class="col-sm-2 col-form-label"></label>
+					<div class="col-sm-6">
+						<input type="submit" value="Inserisci il nuovo genere"
+							class="btn btn-outline-primary mr-2" />
+						<input type="reset"
+							value="Reimposta i valori iniziali"
+							class="btn btn-outline-secondary mr-2" />
+					</div>
+
+				</div>
+			</form>
+
+		</div>
+	</div>
+	<!-- Contenuti della pagina -->
+	<div th:replace="/partial/footer"></div>
+	<div th:replace="/partial/script"></div>
+</body>
+</html>

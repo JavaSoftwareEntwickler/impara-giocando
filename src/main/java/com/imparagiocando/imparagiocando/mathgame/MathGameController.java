@@ -22,9 +22,6 @@ public class MathGameController {
 
     @PostMapping("/answer")
     public String checkAnswer(@RequestParam("answer") int answer,
-                              @RequestParam("num1") int num1,
-                              @RequestParam("num2") int num2,
-                              @RequestParam("operation") String operation,
                               Model model) {
         String result = mathGameService.checkRisposta(answer);
         mathGameService.setPunteggio(answer);

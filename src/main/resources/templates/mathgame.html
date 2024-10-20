@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Gioco di Matematica</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/main.css">
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" xmlns="http://www.w3.org/1999/html">
+<head th:replace="/partial/head"></head>
 <body>
-<div class="container-md text-center border">
+<div th:replace="/partial/nav"></div>
+<div class="container-md text-center border" style="margin-top: 90px;">
     <div class="row">
         <div class="col-md-8">
             <div class="problema center-block text-center">
+                <h1 class="nav-item d-flex" sec:authorize="isAuthenticated()"><a style="pointer-events: none; display: inline-block;" class="nav-link"> Welcome, <span sec:authentication="name"></span></a></h1>
                 <h1 th:switch="${problem.operation}" th:case="'+'">Impariamo l'addizione</h1>
                 <h1 th:switch="${problem.operation}" th:case="'-'">Impariamo la sottrazione</h1>
                 <h1 th:switch="${problem.operation}" th:case="'*'">Impariamo la moltiplicazione</h1>
                 <h2 th:text="'Quanto fa ' + ${problem.num1} + ' ' + ${problem.operation} + ' ' + ${problem.num2} + '?'"></h2>
-                <form action="/answer" method="post">
-                    <input type="hidden" name="problem" th:value="${problem}">
-                    <input type="hidden" name="operation" th:value="${problem.operation}">
-                    <input type="hidden" name="num1" th:value="${problem.num1}">
-                    <input type="hidden" name="num2" th:value="${problem.num2}" >
-                    <button type="submit" name="answer" th:value="${soluzione.valore1}" th:text="${soluzione.valore1}"></button>
-                    <button type="submit" name="answer" th:value="${soluzione.valore2}" th:text="${soluzione.valore2}"></button>
-                    <button type="submit" name="answer" th:value="${soluzione.valore3}" th:text="${soluzione.valore3}"></button>
-                    <button type="submit" name="answer" th:value="${soluzione.valore4}" th:text="${soluzione.valore4}"></button>
+                <form th:action="@{/answer}" method="post">
+                     <!-- id="answer-form">-->
+                  <!--  <input type="hidden" name="answer" id="answer" />-->
+                    <button type="submit" th:name="answer" th:value="${soluzione.valore1}" th:text="${soluzione.valore1}"></button>
+                    <button type="submit" th:name="answer" th:value="${soluzione.valore2}" th:text="${soluzione.valore2}"></button>
+                    <button type="submit" th:name="answer" th:value="${soluzione.valore3}" th:text="${soluzione.valore3}"></button>
+                    <button type="submit" th:name="answer" th:value="${soluzione.valore4}" th:text="${soluzione.valore4}"></button>
+                   <!-- <button type="submit" th:value="${soluzione.valore4}" th:text="${soluzione.valore4}" th:onclick="'javascript:submitForm('+${soluzione.valore4}+')'"></button>-->
+<!--                    <button type="submit" style="visibility:none">Submit</button>-->
                 </form>
             </div>
         </div>
@@ -65,9 +64,15 @@
             </div>
         </div>
     </div>
+<!--    <script>
+        function submitForm(value) {
+            document.getElementById('answer').value = value;
+            document.getElementById('answer-form').submit();
+        }
+    </script>-->
 
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<div th:replace="/partial/footer"></div>
+<div th:replace="/partial/script"></div>
 </body>
 </html>
