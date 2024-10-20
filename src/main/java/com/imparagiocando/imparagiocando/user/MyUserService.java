@@ -1,9 +1,10 @@
-package com.imparagiocando.imparagiocando.auth;
+package com.imparagiocando.imparagiocando.user;
 
+import com.imparagiocando.imparagiocando.auth.AuthService;
+import com.imparagiocando.imparagiocando.email.EmailService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,12 @@ import java.io.IOException;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MyUserServiceImpl {
+public class MyUserService {
     private final MyUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthService authService;
 
-    public MyUser getUserByUsername(String username){ return userRepository.findCustomUserByUsername(username); }
+    public MyUser getUserByUsername(String username){ return userRepository.findMyUserByUsername(username); }
 
     public void registerUser(MyUser user){
         var userToSave = MyUser.builder()
@@ -39,6 +40,7 @@ public class MyUserServiceImpl {
         }
 
     }
+    //Only for per development
     @PostConstruct
     public void postConstruct(){
         try{

@@ -1,6 +1,8 @@
 package com.imparagiocando.imparagiocando.config;
 
-import com.imparagiocando.imparagiocando.auth.CustomUserDetailsService;
+import com.imparagiocando.imparagiocando.user.MyUserDetailsService;
+import com.imparagiocando.imparagiocando.user.MyUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,8 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.Locale;
-
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
@@ -25,7 +25,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return new CustomUserDetailsService();
+        return new MyUserDetailsService();
     }
 
     @Bean

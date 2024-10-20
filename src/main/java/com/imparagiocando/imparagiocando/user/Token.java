@@ -1,6 +1,5 @@
 package com.imparagiocando.imparagiocando.user;
 
-import com.imparagiocando.imparagiocando.auth.MyUser;
 import jakarta.persistence.*;
 import lombok.*;
 

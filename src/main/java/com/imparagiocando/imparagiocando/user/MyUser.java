@@ -1,4 +1,4 @@
-package com.imparagiocando.imparagiocando.auth;
+package com.imparagiocando.imparagiocando.user;
 
 import jakarta.persistence.*;
 import lombok.*;

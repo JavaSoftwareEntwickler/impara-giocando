@@ -1,4 +1,4 @@
-package com.imparagiocando.imparagiocando.mathgame;
+package com.imparagiocando.imparagiocando.game;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;

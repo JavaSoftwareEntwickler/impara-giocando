@@ -1,25 +1,30 @@
-package com.imparagiocando.imparagiocando.mathgame;
+package com.imparagiocando.imparagiocando.game;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class MathGameService {
 
-    private Random random = new Random();
-    @Autowired
-    private PunteggioDTO punteggio;
-    @Autowired
-    private RispostaEsattaDTO rispostaEsattaDTO;
+    private Random random;
+    private final PunteggioDTO punteggio;
+    private final RispostaEsattaDTO rispostaEsattaDTO;
+
+    Random getRandom(){
+        if(this.random == null) return new Random();
+        return this.random;
+    }
 
     // Genera un problema matematico casuale (somma o sottrazione)
     public MathProblemDTO generateProblem() {
-        int num1 = random.nextInt(10) + 1; // Numeri da 1 a 10
-        int num2 = random.nextInt(10) + 1;
+        int num1 = getRandom().nextInt(10) + 1; // Numeri da 1 a 10
+        int num2 = getRandom().nextInt(10) + 1;
         String[] operations = {"+", "-", "*"};
-        String operation = operations[random.nextInt(operations.length)];
+        String operation = operations[getRandom().nextInt(operations.length)];
         return new MathProblemDTO(num1, num2, operation);
     }
 
@@ -64,7 +69,7 @@ public class MathGameService {
     private Set<Integer> popolaSetSoluzioni(int soluzioneCorretta) {
         Set<Integer> soluzioni = new HashSet<>(4);
         soluzioni.add(soluzioneCorretta);
-        if(soluzioneCorretta < 0) soluzioni.add((random.nextInt(10) + 1)*-1);
+        if(soluzioneCorretta < 0) soluzioni.add((getRandom().nextInt(10) + 1)*-1);
         while(soluzioni.size()<4){
             soluzioni.add(getRandomNumber());
         }
@@ -78,11 +83,11 @@ public class MathGameService {
     }
 
     private int getRandomNumber(){
-        return switch (random.nextInt(4) + 1) {
-            case 1 -> random.nextInt(33) + 1;
-            case 2 -> random.nextInt(66) + 1;
-            case 3 -> random.nextInt(99) + 1;
-            case 4 -> (random.nextInt(10) + 1)*-1;
+        return switch (getRandom().nextInt(4) + 1) {
+            case 1 -> getRandom().nextInt(33) + 1;
+            case 2 -> getRandom().nextInt(66) + 1;
+            case 3 -> getRandom().nextInt(99) + 1;
+            case 4 -> (getRandom().nextInt(10) + 1)*-1;
             default -> 0;
         };
     }

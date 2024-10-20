@@ -1,5 +1,7 @@
 package com.imparagiocando.imparagiocando.auth;
 
+import com.imparagiocando.imparagiocando.user.MyUser;
+import com.imparagiocando.imparagiocando.user.MyUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,14 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
-
-    private final MyUserServiceImpl userService;
     private final AuthService authService;
+    private final MyUserService userService;
 
     @GetMapping("/login")
     String getLoginPage() {
