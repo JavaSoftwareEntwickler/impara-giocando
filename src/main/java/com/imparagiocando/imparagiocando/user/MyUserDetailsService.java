@@ -17,6 +17,12 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         MyUser userDb = userService.getUserByUsername(username);
-        return (userDb == null ) ? null : User.builder().username(userDb.getUsername()).password(userDb.getPassword()).roles(userDb.getRole().name()).build() ;
+        return (userDb == null ) ? null :
+                User.builder()
+                .username(userDb.getUsername())
+                .password(userDb.getPassword())
+                .roles(userDb.getRole().name())
+                .disabled(!userDb.isEnabled())
+                .build() ;
     }
 }
