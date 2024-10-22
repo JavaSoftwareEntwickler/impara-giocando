@@ -31,9 +31,6 @@ public class EmailService {
         properties.put("activation_code", newToken);
         Context context = new Context(Locale.ITALY,properties);
         context.setVariables(properties);
-        System.out.println("************************************");
-        System.out.println(EmailTemplateName.MAIL_ACTIVATE_ACCOUNT.name());
-        System.out.println("*************************************");
         String template = templateEngine.process(EmailTemplateName.MAIL_ACTIVATE_ACCOUNT.name(), context);
 
         Email from = new Email("info@portaleapp.com", "PortaleApp");

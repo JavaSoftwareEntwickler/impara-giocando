@@ -46,19 +46,22 @@ public class MyUserService {
         try{
             userRepository.save(MyUser.builder()
                     .username("user@user.com")
-                    .password(passwordEncoder.encode("user"))
+                    .password(passwordEncoder.encode("user@user.com"))
                     .role(MyUserRole.USER)
+                    .enabled(true)
                     .build());
-        userRepository.save(MyUser.builder()
-                        .username("admin@admin.com")
-                        .password(passwordEncoder.encode("admin"))
-                        .role(MyUserRole.ADMIN)
-                .build());
-        userRepository.save(MyUser.builder()
-                .username("super@super.com")
-                .password(passwordEncoder.encode("super"))
-                .role(MyUserRole.SUPER_USER)
-                .build());
+            userRepository.save(MyUser.builder()
+                    .username("admin@admin.com")
+                    .password(passwordEncoder.encode("admin@admin.com"))
+                    .role(MyUserRole.ADMIN)
+                    .enabled(true)
+                    .build());
+            userRepository.save(MyUser.builder()
+                    .username("super@super.com")
+                    .password(passwordEncoder.encode("super@super.com"))
+                    .role(MyUserRole.SUPER_USER)
+                    .enabled(true)
+                    .build());
         }catch (DataIntegrityViolationException e){
 
         }
