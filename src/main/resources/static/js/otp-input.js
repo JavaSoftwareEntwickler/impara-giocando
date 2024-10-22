@@ -1,4 +1,4 @@
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", () => {
     // Get otp container
     const OTPContainer = document.querySelector("#otp-input");
 

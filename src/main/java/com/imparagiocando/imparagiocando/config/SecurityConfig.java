@@ -1,8 +1,6 @@
 package com.imparagiocando.imparagiocando.config;
 
 import com.imparagiocando.imparagiocando.user.MyUserDetailsService;
-import com.imparagiocando.imparagiocando.user.MyUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +20,8 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+
+    public static final String LOGIN_MAPPING = "/login";
 
     @Bean
     public UserDetailsService userDetailsService(){
@@ -43,24 +43,25 @@ public class SecurityConfig {
         //http.csrf(AbstractHttpConfigurer::disable)
         http.authorizeHttpRequests(auth -> {
                     auth.requestMatchers(
-                            antMatcher("/login"),
+                            antMatcher(LOGIN_MAPPING),
                             antMatcher("/logout"),
                             antMatcher("/register"),
-                            antMatcher("/static/css/*"),
-                            antMatcher("/images/*"),
+                            antMatcher("/css/**"),
+                            antMatcher("/js/**"),
+                            antMatcher("/images/**"),
                             antMatcher("/answer"),
-                            antMatcher("/mathgame"),
                             antMatcher("/game"),
                             antMatcher("/result"),
                             antMatcher("/activate-account")
                             ).permitAll();
                     auth.anyRequest().authenticated();
                     });
-        http.formLogin(form->form.loginPage("/login")
+        http.formLogin(form->form.loginPage(LOGIN_MAPPING)
                         .permitAll()
-                        .loginProcessingUrl("/login")
+                        .loginProcessingUrl(LOGIN_MAPPING)
                         .defaultSuccessUrl("/game" ,true))
                 .logout(LogoutConfigurer::permitAll);
         return http.build();
     }
+
 }

@@ -1,63 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/otp-input.js"></script>
-    <title>Account Activation</title>
-    <style>
-        #otp-input {
-          display: flex;
-          column-gap: 8px;
-        }
-        #otp-input input {
-          text-align: center;
-          padding: 10px 8px 10px 8px;
-          border: 1px solid #adadad;
-          border-radius: 4px;
-          outline: none;
-          height: 64px;
-          width: 50px;
-        }
-        #otp-input input:focus {
-          border: 1px solid #497e76;
-        }
-        #otp-input input:focus::placeholder {
-          color: transparent;
-        }
-        #otp-input input::-webkit-outer-spin-button,
-        #otp-input input::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-        #otp-input input[type="number"] {
-          -moz-appearance: textfield; /* Firefox */
-        }
-    </style>
-  <script>
-      const continueButton = document.querySelector("#submit");
-      continueButton.addEventListener("click", (e) => {
-        updateValue(inputs);
-        alert(OTPValueContainer.value);
-      });
-  </script>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" xmlns="http://www.w3.org/1999/html">
+<head th:replace="/partial/head"></head>
+<style>
+    #otp-input {
+      display: flex;
+      column-gap: 8px;
+    }
+    #otp-input input {
+      text-align: center;
+      padding: 10px 8px 10px 8px;
+      border: 1px solid #adadad;
+      border-radius: 4px;
+      outline: none;
+      height: 64px;
+      width: 50px;
+    }
+    #otp-input input:focus {
+      border: 1px solid #497e76;
+    }
+    #otp-input input:focus::placeholder {
+      color: transparent;
+    }
+    #otp-input input::-webkit-outer-spin-button,
+    #otp-input input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    #otp-input input[type="number"] {
+      -moz-appearance: textfield; /* Firefox */
+    }
+</style>
 <body>
-<div class="container">
+<div class="container" style="margin-top: 90px;">
     <div class="text-center" style="width: 400px;">
         <h2>Type your activation code</h2>
-        <div id="otp-input">
-            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-            <input id="otp-value" placeholder="_" type="hidden" name="otp" />
-        </div>
-        <button id="submit">Submit</button>
+        <form th:action="@{/activate-account}" method="post" id="otp-input">
+            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+            <input id="otp-value" placeholder="_" type="hidden" name="otp"/>
+            <button id="submit" type="submit" class="btn btn-primary form-control mb-4">Sign on</button>
+        </form>
+
     </div>
 </div>
-<script src="./otp-input.js"></script>
+<script th:src="@{/js/otp-input.js}"></script>
 </body>
 </html>
